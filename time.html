@@ -1,0 +1,59 @@
+<head>
+
+        <title>Test</title>
+        <style>
+                body {
+                        text-align: center;
+                        background-color: aliceblue;
+                        font-size: 20;
+                }
+        </style>
+
+</head>
+<body>
+
+        <h1>개강까지 남은 시간</h1>
+        <p id = "A"></p>
+        <p id = "B"></p>
+
+
+        <script>
+                
+                weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                let now;
+                let end = new Date('2026-09-01T00:00:00');
+
+                function today() {
+                        now = new Date();
+                        document.getElementById("B").innerHTML =
+                        "Today - " + weekday[now.getDay()] + " " + now.getMonth() + "/" + now.getDate() + " " +
+                        now.getHours() + ":" +
+                        (now.getMinutes() >= 10 ? now.getMinutes() : "0" + now.getMinutes()) + ":" + 
+                        (now.getSeconds() >= 10 ? now.getSeconds() : "0" + now.getSeconds());
+
+                }
+
+                function timeLeft() {
+                        let gapsec = (end.getTime() - now.getTime()) / 1000;
+
+                        document.getElementById("A").innerHTML =
+                        Math.trunc(gapsec / 604800).toLocaleString() + " 주" + "<br>" +
+                        Math.trunc(gapsec / 86400).toLocaleString() + " 일" + "<br>" +
+                        Math.trunc(gapsec / 3600).toLocaleString() + " 시간" + "<br>" +
+                        Math.trunc(gapsec / 60).toLocaleString() + " 분" + "<br>" +
+                        Math.trunc(gapsec).toLocaleString() + " 초" + "<br>";
+
+                        if (gapsec <= 0) document.getElementById("B").innerHTML = "개강 ㅅㅅㅅㅅㅅ";
+                }
+                today();
+                timeLeft();
+                
+                setInterval(today, 1000);
+                setInterval(timeLeft, 1000);
+                
+
+
+
+
+        </script>
+</body>
